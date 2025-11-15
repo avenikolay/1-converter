@@ -4,7 +4,7 @@ import "fmt"
 
 func getUserInput() string {
 	var userInput string
-	fmt.Scan(userInput)
+	fmt.Scan(&userInput)
 	return userInput
 }
 
