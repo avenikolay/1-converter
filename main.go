@@ -78,7 +78,7 @@ func calculateConversion(sum float64, initialCurrency string, targetCurrency str
 	result := currencyMap[conversionKey]
 
 	fmt.Printf("%.2f %s = %.2f %s\n", sum, initialCurrency, result, targetCurrency)
-	return result
+	return result * sum
 }
 
 func main() {
