@@ -60,7 +60,15 @@ func getTargetCurrency(initialCurrency string) string {
 	return targetCurrency
 }
 
-func calculateConversion(sum float64, initialCurrency string, targetCurrency string) float64 {
+func calculateConversion(sum float64, initialCurrency string, targetCurrency string, currencyMap map[string]float64) float64 {
+	conversionKey := initialCurrency + "to" + targetCurrency
+	result := currencyMap[conversionKey]
+
+	fmt.Printf("%.2f %s = %.2f %s\n", sum, initialCurrency, result, targetCurrency)
+	return result * sum
+}
+
+func main() {
 	const USDtoEUR = 0.82
 	const USDtoRUB = 63.52
 	const EURtoRUB = USDtoRUB / USDtoEUR
@@ -74,16 +82,8 @@ func calculateConversion(sum float64, initialCurrency string, targetCurrency str
 		"RUBtoEUR": 1 / EURtoRUB,
 	}
 
-	conversionKey := initialCurrency + "to" + targetCurrency
-	result := currencyMap[conversionKey]
-
-	fmt.Printf("%.2f %s = %.2f %s\n", sum, initialCurrency, result, targetCurrency)
-	return result * sum
-}
-
-func main() {
 	initialCurrency := getInitialCurrency()
 	sum := getSum()
 	targetCurrency := getTargetCurrency(initialCurrency)
-	calculateConversion(sum, initialCurrency, targetCurrency)
+	calculateConversion(sum, initialCurrency, targetCurrency, currencyMap)
 }
