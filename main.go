@@ -60,9 +60,9 @@ func getTargetCurrency(initialCurrency string) string {
 	return targetCurrency
 }
 
-func calculateConversion(sum float64, initialCurrency string, targetCurrency string, currencyMap map[string]float64) float64 {
+func calculateConversion(sum float64, initialCurrency string, targetCurrency string, currencyMap *map[string]float64) float64 {
 	conversionKey := initialCurrency + "to" + targetCurrency
-	result := currencyMap[conversionKey]
+	result := (*currencyMap)[conversionKey]
 
 	fmt.Printf("%.2f %s = %.2f %s\n", sum, initialCurrency, result, targetCurrency)
 	return result * sum
@@ -85,5 +85,5 @@ func main() {
 	initialCurrency := getInitialCurrency()
 	sum := getSum()
 	targetCurrency := getTargetCurrency(initialCurrency)
-	calculateConversion(sum, initialCurrency, targetCurrency, currencyMap)
+	calculateConversion(sum, initialCurrency, targetCurrency, &currencyMap)
 }
